@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/takehome-sicred
-    username: ${USERNAME}
-    password: ${PASSWORD}
+    url: jdbc:postgresql://localhost:5432/takehome_sicred
+    username: postgres
+    password: postgres
   jpa:
     hibernate:
       ddl-auto: update

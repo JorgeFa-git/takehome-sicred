@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/takehome-sicred
+    url: jdbc:postgresql://localhost:5432/takehome_sicred
     username: postgres
     password: postgres
   jpa:

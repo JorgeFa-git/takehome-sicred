@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -95,6 +94,16 @@ public class AppService {
     }
 
     public Page getConfirmVotePage(boolean vote, Long pautaId) {
+        Optional<Pauta> pauta = this.pautaRepository.findById(pautaId);
+
+        if (pauta.isEmpty()) {
+            return new Page("Pauta não encontrada", PageType.FORMULARIO, null, null, new Button("Voltar", dominio + "/pauta/listar-pautas", null));
+        }
+
+        if (pauta.get().getExpiresAt().isBefore(OffsetDateTime.now())) {
+            return new Page("A sessão da pauta foi fechada", PageType.FORMULARIO, null, null, new Button("Voltar", dominio + "/pauta/listar-pautas", null));
+        }
+
         this.voteRepository.save(new Vote(null, vote, pautaId));
 
         return new Page("Voto confirmado", PageType.FORMULARIO, Collections.singletonList(
